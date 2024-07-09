@@ -1,0 +1,4 @@
+extraArgs:
+  default-ssl-certificate: "infra/ingress-default-cert"
+service:
+  type: ClusterIP

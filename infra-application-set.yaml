@@ -1,0 +1,45 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: clusterbootstrap
+  namespace: argocd
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+  - list:
+      elements:
+      - cluster: staging1
+        type: staging
+        url: "https://"
+      - cluster: qa1
+        type: qa
+        url: "https://"
+      - cluster: staging2
+        type: staging
+        url: "https://"
+  template:
+    metadata:
+      name: '{{.cluster}}-infra'
+    spec:
+      project: "default"
+      source:
+        repoURL: https://github.com/jp-gouin/infra-gitops.git
+        targetRevision: HEAD
+        path: environment-promotion/envs/{{.type}}/{{.type}}-apps
+        helm:
+          parameters:
+          - name: "clusterName"
+            value: '{{.cluster}}'
+          - name: "destCluster"
+            value: '{{.url}}'
+                
+      destination:
+        server: 'https://kubernetes.default.svc'
+        namespace: infra
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true

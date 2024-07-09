@@ -1,0 +1,2 @@
+kind: Deployment
+replicaCount: 3

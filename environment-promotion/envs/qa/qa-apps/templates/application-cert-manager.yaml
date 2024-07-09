@@ -1,0 +1,32 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cert-manager-qa-{{$.Values.clusterName}}
+  namespace: argocd
+spec:
+  project: default
+  sources:
+  - chart: cert-manager
+    repoURL: registry-1.docker.io/bitnamicharts  # note: the oci:// syntax is not included.
+    targetRevision: 1.3.8
+    helm:
+      valueFiles:
+      - $values/environment-promotion/variants/non-prod/cert-manager-values.yaml
+      - $values/environment-promotion/envs/qa/cert-manager-version.yaml
+  - repoURL: 'https://github.com/jp-gouin/infra-gitops.git'
+    targetRevision: HEAD
+    ref: values
+  - repoURL: 'https://github.com/jp-gouin/infra-gitops.git'
+    path: environment-promotion/envs/qa/cert-manager-config
+    directory:
+      include: 'cert-manager-issuer-qa.yaml'
+    targetRevision: HEAD
+  destination:
+    server: {{$.Values.destCluster}}
+    namespace: infra
+  syncPolicy:
+    # automated:
+    #   prune: true
+    #   selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

@@ -1,6 +1,6 @@
 # GitOps at scale for cluster bootstraping
 
-This repository host the example mentioning in the article []()
+This repository host the example mentioning in the article [GitOps at scale - clusters bootstraping](https://medium.com/@jp-gouin/gitops-at-scale-clusters-bootstrapping-f36695d4340d)
 
 ## Cluster deployment
 Under `kind/` you'll find 4 clusters definition

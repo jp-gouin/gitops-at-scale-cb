@@ -14,7 +14,7 @@ spec:
       - $values/environment-promotion/variants/non-prod/nginx-values.yaml
       - $values/environment-promotion/envs/qa/nginx-version.yaml
       - $values/environment-promotion/base/nginx-common.yaml
-  - repoURL: 'https://github.com/jp-gouin/infra-gitops.git'
+  - repoURL: 'https://github.com/jp-gouin/gitops-at-scale-cb.git'
     targetRevision: HEAD
     ref: values
   destination:

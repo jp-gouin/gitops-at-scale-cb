@@ -13,10 +13,10 @@ spec:
       valueFiles:
       - $values/environment-promotion/variants/non-prod/cert-manager-values.yaml
       - $values/environment-promotion/envs/staging/cert-manager-version.yaml
-  - repoURL: 'https://github.com/jp-gouin/infra-gitops.git'
+  - repoURL: 'https://github.com/jp-gouin/gitops-at-scale-cb.git'
     targetRevision: HEAD
     ref: values
-  - repoURL: 'https://github.com/jp-gouin/infra-gitops.git'
+  - repoURL: 'https://github.com/jp-gouin/gitops-at-scale-cb.git'
     path: environment-promotion/envs/staging/cert-manager-config
     directory:
       include: 'cert-manager-issuer-staging.yaml'

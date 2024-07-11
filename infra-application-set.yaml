@@ -24,7 +24,7 @@ spec:
     spec:
       project: "default"
       source:
-        repoURL: https://github.com/jp-gouin/infra-gitops.git
+        repoURL: https://github.com/jp-gouin/gitops-at-scale-cb.git
         targetRevision: HEAD
         path: environment-promotion/envs/{{.type}}/{{.type}}-apps
         helm:
